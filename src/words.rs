@@ -53,77 +53,29 @@ macro_rules! generate_lazy_db_from_file {
     };
 }
 
-#[cfg(feature = "de")]
-generate_lazy_db_from_file!(de);
-#[cfg(feature = "en")]
-generate_lazy_db_from_file!(en);
-#[cfg(feature = "es")]
-generate_lazy_db_from_file!(es);
-#[cfg(feature = "fr")]
-generate_lazy_db_from_file!(fr);
-#[cfg(feature = "ja")]
-generate_lazy_db_from_file!(ja);
-#[cfg(feature = "ru")]
-generate_lazy_db_from_file!(ru);
-#[cfg(feature = "zh")]
-generate_lazy_db_from_file!(zh);
+generate_lazy_db_from_file!(sw);
+generate_lazy_db_from_file!(fw);
 
 #[inline(always)]
 pub(crate) fn get(lang: Lang) -> &'static Words {
     match lang {
-        #[cfg(feature = "de")]
-        Lang::De => &DE,
-        #[cfg(feature = "en")]
-        Lang::En => &EN,
-        #[cfg(feature = "es")]
-        Lang::Es => &ES,
-        #[cfg(feature = "fr")]
-        Lang::Fr => &FR,
-        #[cfg(feature = "ja")]
-        Lang::Ja => &JA,
-        #[cfg(feature = "ru")]
-        Lang::Ru => &RU,
-        #[cfg(feature = "zh")]
-        Lang::Zh => &ZH,
+        Lang::Simple => &SW,
+        Lang::Full => &FW,
     }
 }
 
 #[inline(always)]
 pub(crate) fn get_len(len: usize, lang: Lang) -> Option<&'static Words> {
     match lang {
-        #[cfg(feature = "de")]
-        Lang::De => DE_LEN.get(&len),
-        #[cfg(feature = "en")]
-        Lang::En => EN_LEN.get(&len),
-        #[cfg(feature = "es")]
-        Lang::Es => ES_LEN.get(&len),
-        #[cfg(feature = "fr")]
-        Lang::Fr => FR_LEN.get(&len),
-        #[cfg(feature = "ja")]
-        Lang::Ja => JA_LEN.get(&len),
-        #[cfg(feature = "ru")]
-        Lang::Ru => RU_LEN.get(&len),
-        #[cfg(feature = "zh")]
-        Lang::Zh => ZH_LEN.get(&len),
+        Lang::Simple => SW_LEN.get(&len),
+        Lang::Full => FW_LEN.get(&len),
     }
 }
 
 #[inline(always)]
 pub(crate) fn get_starts_with(char: char, lang: Lang) -> Option<&'static Words> {
     match lang {
-        #[cfg(feature = "de")]
-        Lang::De => DE_STARTS_WITH.get(&char),
-        #[cfg(feature = "en")]
-        Lang::En => EN_STARTS_WITH.get(&char),
-        #[cfg(feature = "es")]
-        Lang::Es => ES_STARTS_WITH.get(&char),
-        #[cfg(feature = "fr")]
-        Lang::Fr => FR_STARTS_WITH.get(&char),
-        #[cfg(feature = "ja")]
-        Lang::Ja => JA_STARTS_WITH.get(&char),
-        #[cfg(feature = "ru")]
-        Lang::Ru => RU_STARTS_WITH.get(&char),
-        #[cfg(feature = "zh")]
-        Lang::Zh => ZH_STARTS_WITH.get(&char),
+        Lang::Simple => SW_STARTS_WITH.get(&char),
+        Lang::Full => FW_STARTS_WITH.get(&char),
     }
 }

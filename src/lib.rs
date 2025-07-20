@@ -14,13 +14,7 @@
 //! ```
 //!
 //! **Supported Languages:**
-//! - English
-//! - Spanish
-//! - German
-//! - French
-//! - Japanese
-//! - Russian
-//! - Chinese
+//! - Wordle
 //!
 
 mod words;
@@ -36,30 +30,13 @@ use rand::{seq::SliceRandom, thread_rng};
 ///
 /// # Variants
 ///
-/// * `De` - German. Requires enabling "de" feature.
-/// * `En` - English. Requires enabling "en" feature.
-/// * `Es` - Spanish. Requires enabling "es" feature.
-/// * `Fr` - French. Requires enabling "fr" feature.
-/// * `Ja` - Japanese. Requires enabling "ja" feature.
-/// * `Ru` - Russian. Requires enabling "ru" feature.
-/// * `Zh` - Chinese. Requires enabling "zh" feature.
+/// * `Simple` - Wordle for those of us who like to win.
+/// * `Full` - They say it's 'english' but I have questions.
 ///
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Lang {
-    #[cfg(feature = "de")]
-    De,
-    #[cfg(feature = "en")]
-    En,
-    #[cfg(feature = "es")]
-    Es,
-    #[cfg(feature = "fr")]
-    Fr,
-    #[cfg(feature = "ja")]
-    Ja,
-    #[cfg(feature = "ru")]
-    Ru,
-    #[cfg(feature = "zh")]
-    Zh,
+    Simple,
+    Full,
 }
 
 /// Returns all words with the given language.
