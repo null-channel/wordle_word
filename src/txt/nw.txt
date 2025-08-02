@@ -1,4 +1,9 @@
 scrum
+excel
+cobol
+emacs
+basic
+forth
 agile
 alert
 error
