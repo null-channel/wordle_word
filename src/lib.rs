@@ -37,6 +37,7 @@ use rand::{seq::SliceRandom, thread_rng};
 pub enum Lang {
     Simple,
     Full,
+    Nerd,
 }
 
 /// Returns all words with the given language.

@@ -55,12 +55,14 @@ macro_rules! generate_lazy_db_from_file {
 
 generate_lazy_db_from_file!(sw);
 generate_lazy_db_from_file!(fw);
+generate_lazy_db_from_file!(nw);
 
 #[inline(always)]
 pub(crate) fn get(lang: Lang) -> &'static Words {
     match lang {
         Lang::Simple => &SW,
         Lang::Full => &FW,
+        Lang::Nerd => &NW,
     }
 }
 
@@ -69,6 +71,7 @@ pub(crate) fn get_len(len: usize, lang: Lang) -> Option<&'static Words> {
     match lang {
         Lang::Simple => SW_LEN.get(&len),
         Lang::Full => FW_LEN.get(&len),
+        Lang::Nerd => NW_LEN.get(&len),
     }
 }
 
@@ -77,5 +80,6 @@ pub(crate) fn get_starts_with(char: char, lang: Lang) -> Option<&'static Words> 
     match lang {
         Lang::Simple => SW_STARTS_WITH.get(&char),
         Lang::Full => FW_STARTS_WITH.get(&char),
+        Lang::Nerd => NW_STARTS_WITH.get(&char),
     }
 }
