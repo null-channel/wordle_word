@@ -64,3 +64,4 @@ elite
 grind
 stats
 botch
+atari

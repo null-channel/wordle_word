@@ -34,10 +34,21 @@ use rand::{seq::SliceRandom, thread_rng};
 /// * `Full` - They say it's 'english' but I have questions.
 ///
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub enum Lang {
-    Simple,
-    Full,
+pub enum WordList {
+    Standard,
+    Challenge,
     Nerd,
+}
+
+impl From<&str> for WordList {
+    fn from(thing: &str) -> Self {
+        match thing.to_ascii_lowercase().as_str() {
+            "challenge" => WordList::Challenge,
+            "nerd" => WordList::Nerd,
+            "standard" => WordList::Standard,
+            _ => WordList::Standard,
+        }
+    }
 }
 
 /// Returns all words with the given language.
@@ -49,7 +60,7 @@ pub enum Lang {
 /// assert!(!words.is_empty());
 /// ```
 #[inline(always)]
-pub fn all(lang: Lang) -> &'static [&'static str] {
+pub fn all(lang: WordList) -> &'static [&'static str] {
     words::get(lang)
 }
 
@@ -62,7 +73,7 @@ pub fn all(lang: Lang) -> &'static [&'static str] {
 /// assert!(!word.is_empty());
 /// ```
 #[inline(always)]
-pub fn get(lang: Lang) -> &'static str {
+pub fn get(lang: WordList) -> &'static str {
     words::get(lang)
         .choose(&mut thread_rng())
         .expect("array is empty")
@@ -77,7 +88,7 @@ pub fn get(lang: Lang) -> &'static str {
 /// assert!(words.is_some());
 /// ```
 #[inline(always)]
-pub fn all_len(len: usize, lang: Lang) -> Option<&'static [&'static str]> {
+pub fn all_len(len: usize, lang: WordList) -> Option<&'static [&'static str]> {
     words::get_len(len, lang).map(|boxed| &**boxed)
 }
 
@@ -90,7 +101,7 @@ pub fn all_len(len: usize, lang: Lang) -> Option<&'static [&'static str]> {
 /// assert!(word.is_some());
 /// ```
 #[inline(always)]
-pub fn get_len(len: usize, lang: Lang) -> Option<&'static str> {
+pub fn get_len(len: usize, lang: WordList) -> Option<&'static str> {
     words::get_len(len, lang)?
         .choose(&mut thread_rng())
         .copied()
@@ -105,7 +116,7 @@ pub fn get_len(len: usize, lang: Lang) -> Option<&'static str> {
 /// assert!(words.is_some());
 /// ```
 #[inline(always)]
-pub fn all_starts_with(char: char, lang: Lang) -> Option<&'static [&'static str]> {
+pub fn all_starts_with(char: char, lang: WordList) -> Option<&'static [&'static str]> {
     words::get_starts_with(char, lang).map(|boxed| &**boxed)
 }
 
@@ -118,7 +129,7 @@ pub fn all_starts_with(char: char, lang: Lang) -> Option<&'static [&'static str]
 /// assert!(word.is_some());
 /// ```
 #[inline(always)]
-pub fn get_starts_with(char: char, lang: Lang) -> Option<&'static str> {
+pub fn get_starts_with(char: char, lang: WordList) -> Option<&'static str> {
     words::get_starts_with(char, lang)?
         .choose(&mut thread_rng())
         .copied()
